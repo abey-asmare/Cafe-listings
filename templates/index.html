@@ -130,10 +130,12 @@
                             Google Maps
                         </a>
                       </div>
+                      {% if current_user.is_authenticated %}
                         <div>
 <a href="{{ url_for('update_listing', cafe_id = cafe.id) }}"> <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/update.png') }}  "></a>
 <a href="{{ url_for('delete_listing', cafe_id = cafe.id) }}"> <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/delete.png') }}  "></a>
                         </div>
+                      {% endif %}
                     </div>
                   </div>
                 </div>

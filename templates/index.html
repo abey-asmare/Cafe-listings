@@ -1,0 +1,153 @@
+<!-- Header file -->
+{% include 'header.html' %}
+<!-- Header file -->
+
+  <div class="main-banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="top-text header-text">
+            <h6>Cafe Listings</h6>
+            <h2>Find Nearby Cafes</h2>
+          </div>
+        </div>
+        <div class="col-lg-12 ">
+
+             <div>
+
+                {% with messages =  get_flashed_messages() %}
+                {% if messages %}
+                {% for message in messages %}
+                  <div class = "alert alert-success " style="margin:1% 25%;" role = 'alert'>
+                    {{ message }}
+                 </div>
+                            {% endfor %}
+                        {% endif %}
+                        {% endwith %}
+               {% if errors in form.query.errors %}
+               {% for error in errors %}
+               <div class = "alert alert-danger " style="margin:1% 25%;" role = 'alert'>
+                    {{ error }}
+                 </div>
+               {% endfor %}
+               {% endif %}
+
+            </div>
+          <form id="search-form" class="forms" style="margin: 2% 15%; padding: 3%;" name="gs" method="post" >
+            {{ form.csrf_token }}
+              <div class="row">
+              <div class="col-lg-4 align-self-center">
+                  <fieldset>
+                    {{ form.select(class_ = 'form-select') }}
+                  </fieldset>
+              </div>
+              <div class="col-lg-4 align-self-center">
+                  <fieldset>
+                    {{ form.query(class_="searchText", placeholder="Enter a location") }}
+                  </fieldset>
+              </div>
+              <div class="col-lg-4 align-self-center">
+                      {{ form.submit(class_ = "main-button") }}
+
+              </div>
+              </div>
+          </form>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="recent-listing">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="section-heading">
+            <h2>Recent Listing</h2>
+            <h6>Check Them Out</h6>
+          </div>
+        </div>
+<!--       recent listings-->
+        <div class="col-lg-12">
+          <div class="owl-carousel owl-listing">
+            <div class="item">
+              <div class="row">
+            {% if cafes %}
+            {% for cafe in cafes %}
+          <div class="col-lg-12">
+                  <div class="listing-item">
+                      <img class="img-img" src="{{ url_for('static', filename = 'assets/images/img.jpg') }} ">
+                    <div class="right-content align-self-center">
+                      <a href="#"><h4>{{cafe.name}}</h4></a>
+                        <p>
+                            <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/price-tag.png') }}">
+                            {{ cafe.coffee_price }}
+                        </p>
+
+                         <p>
+                             {% if cafe.has_wifi %}
+                            <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/wifi.png') }}">
+                             {% else %}
+                            <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/no-wifi.png') }}">
+
+                             {% endif %}
+
+                        </p>
+                        <p>
+                            {% if cafe.can_take_calls %}
+                        <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/customer-service.png') }}">
+                        {% else %}
+                         <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/no-customer-service.png') }}">
+                        {% endif %}
+                        </p>
+
+                         <p>
+                            {% if cafe.has_sockets%}
+                        <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/socket.png') }}">
+                        {% else %}
+                        <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/no-socket.png') }}">
+                        {% endif %}
+                        </p>
+
+                         <p>
+                          Number of seats:
+                             {{ cafe.seats }}
+                        </p>
+                         <p>
+                            {% if cafe.has_toilet %}
+                        <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/toilet.png') }}">
+                        {% else %}
+                         <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/no-toilet.png') }}">
+                        {% endif %}
+                        </p>
+
+
+                      <div class="main-white-button">
+                        <a href="{{cafe.map_url}}">
+                            <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/map.png') }}">
+                            Google Maps
+                        </a>
+                      </div>
+                        <div>
+<a href="{{ url_for('update_listing', cafe_id = cafe.id) }}"> <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/update.png') }}  "></a>
+<a href="{{ url_for('delete_listing', cafe_id = cafe.id) }}"> <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/delete.png') }}  "></a>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+
+            {% endfor %}
+            {% endif %}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Footer file -->
+<!--{% include 'footer.html' %}-->
+<!-- Footer file -->

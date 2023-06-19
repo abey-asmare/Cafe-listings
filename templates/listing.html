@@ -1,0 +1,146 @@
+{% include 'header.html' %}
+
+
+  <div class="page-heading">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8">
+          <div class="top-text header-text">
+            <h6>Check Out Our Listings</h6>
+            <h2>Cafe listings of Different Categories</h2>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="listing-page">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="naccs">
+            <div class="grid">
+              <div class="row">
+                <div class="col-lg-3">
+                  <div class="menu">
+                    <div class="first-thumb active">
+                          <a style="color: white;" href="{{ url_for('favorites') }}">
+                      <div class="thumb">
+                                <span class="icon">
+                        <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/heart.png') }}">
+                        </span>
+                        Our Favorite
+                      </div>
+                          </a>
+                    </div>
+                    <div>
+                        <a href="{{ url_for('random_cafes') }} ">
+                           <div class="thumb">
+                        <span class="icon">
+                        <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/all.png') }}">
+                        </span>
+                        10 Random cafes
+                      </div>
+                        </a>
+
+                    </div>
+                    <div>
+                        <a href="{{ url_for('all_cafes') }} ">
+
+                      <div class="thumb">
+                        <span class="icon">
+                        <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/shuffle.png') }}">
+                        </span>
+                        All cafes
+                      </div>
+                        </a>
+                    </div>
+
+                  </div>
+                </div>
+
+
+
+
+<div class="col-lg-9">
+                      <div>
+                        <div class="col-lg-12">
+                            <div class="item">
+                                {% if cafes %}
+                                {% for cafe in cafes %}
+                                <div class="col-lg-12">
+                                  <div class="listing-item">
+                                    <div class="left-image" style="width:450px;height=350px">
+                                      <a href="#"><img src="{{cafe.img_url}}" style="width:450px;height:350px" alt=""></a>
+                                      <div class="hover-content">
+                                        <div class="main-white-button">
+                                          <a href="{{cafe.map_url}}">
+                                           <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/map.png') }} ">
+                                            Google Maps</a>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    <div class="right-content align-self-center">
+                                      <a href="{{ cafe.map_url }} "><h4>{{cafe.name}}</h4></a>
+
+                                       <p>
+                                  {% if cafe.has_wifi %}
+                                <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/wifi.png') }}">
+                                 {% else %}
+                                  <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/no-wifi.png') }}">
+
+                                  {% endif %}
+                            <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/price-tag.png') }}">
+                            {{ cafe.coffee_price }}
+                        </p>
+
+                        <p>
+                            {% if cafe.can_take_calls %}
+                        <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/customer-service.png') }}">
+                        {% else %}
+                         <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/no-customer-service.png') }}">
+                        {% endif %}
+                           {% if cafe.has_sockets%}
+                        <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/socket.png') }}">
+                        {% else %}
+                        <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/no-socket.png') }}">
+                        {% endif %}
+
+
+                        </p>
+
+                         <p>
+                            {% if cafe.has_toilet %}
+                        <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/toilet.png') }}">
+                        {% else %}
+                         <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/no-toilet.png') }}">
+                        {% endif %}
+                        </p>
+                                       <p>
+                          Number of seats:
+                             {{ cafe.seats }}
+                        </p>
+                                    </div>
+                                       <div>
+<a href="{{ url_for('update_listing', cafe_id = cafe.id) }}"> <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/update.png') }}  "></a>
+<a href="{{ url_for('delete_listing', cafe_id = cafe.id) }}"> <img class = "icon-img" src="{{ url_for('static', filename = 'assets/images/delete.png') }}  "></a>
+                        </div>
+                                  </div>
+                                </div>
+                                {% endfor %}
+                                {% endif %}
+
+                              </div>
+
+                          </div>
+                        </div>
+
+                </div>
+
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

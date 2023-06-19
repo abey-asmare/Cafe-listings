@@ -1,0 +1,96 @@
+{% include 'header.html' %}
+
+<div class="main-banner">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="top-text header-text">
+            <h6>What's New?</h6>
+            <h2>Edit Cafe Listings</h2>
+          </div>
+        </div>
+        <div class="col-lg-12 ">
+          <form id="search-form" class="forms" style="margin: 1% 15%; padding: 3%;" method="post"  >
+                {{ form.csrf_token }}
+            <div class="row">
+              <div class="col-lg-4 align-self-center">
+                  <fieldset>
+                    {{ form.name(placeholder = "cafe name") }}
+                  </fieldset>
+              </div>
+              <div class="col-lg-4 align-self-center">
+                  <fieldset>
+                    {{ form.seats(class_="searchText", placeholder="Seats") }}
+                  </fieldset>
+              </div>
+                <div class="col-lg-4 align-self-center">
+                  <fieldset>
+                    {{ form.location( placeholder="Enter a location") }}
+                  </fieldset>
+              </div>
+
+            </div>
+               <div class="row my-5">
+              <div class="col-lg-4 align-self-center">
+                  <fieldset>
+                {{ form.coffee_price( placeholder="Coffee price") }}
+
+                  </fieldset>
+              </div>
+              <div class="col-lg-4 align-self-center">
+                  <fieldset>
+                 {{ form.map_url(class_="searchText", placeholder="Map url") }}
+
+                  </fieldset>
+              </div>
+                <div class="col-lg-4 align-self-center">
+                  <fieldset>
+
+                 {{ form.img_url( placeholder="Image url") }}
+
+                  </fieldset>
+              </div>
+
+               <div class="row my-5">
+              <div class="col-lg-4 align-self-center">
+                  <fieldset>
+                    {{ form.has_toilet.label}}
+                    {{ form.has_toilet(class_='bool-field')}}
+                  </fieldset>
+              </div>
+              <div class="col-lg-4 align-self-center">
+                  <fieldset>
+                    {{ form.has_wifi.label }}
+                    {{ form.has_wifi(class_='bool-field') }}
+                  </fieldset>
+              </div>
+                <div class="col-lg-4 align-self-center">
+                  <fieldset>
+
+                   <p> {{ form.can_take_calls.label }}
+                    {{ form.can_take_calls(class_='bool-field') }}</p>
+                  </fieldset>
+              </div>
+              <div class="col-lg-4 align-self-center">
+                      {{ form.submit(class_ = "main-button") }}
+
+              </div>
+              </div>
+               </div>
+               <div class="row my-5">
+              <div class="col-lg-4 align-self-center">
+                  <fieldset>
+                    {{ form.has_sockets.label}}
+                    {{ form.has_toilet(class_='bool-field')}}
+                  </fieldset>
+              </div>
+              <div class="col-lg-4 align-self-center">
+                      {{ form.submit(class_ = "main-button") }}
+
+              </div>
+              </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
